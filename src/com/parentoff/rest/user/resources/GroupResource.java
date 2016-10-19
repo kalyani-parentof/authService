@@ -56,6 +56,29 @@ public class GroupResource {
 		return genericResponse;
 	}
 
+	@POST
+	@Path("{group_name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public GenericResponse updateGroup(Group group, @PathParam("group_name") String group_name) {
+		LOGGER.info("adding new group");
+		GenericResponse genericResponse = new GenericResponse();
+		try {
+			LOGGER.info(group.toString());
+			Group dbgrp = dao.get(group_name);
+			dbgrp.update(group);
+			dao.update(dbgrp);
+			genericResponse.setResponseCode(200);
+			genericResponse.setResponseDesc("success");
+
+		}catch (Exception e){
+			e.printStackTrace();
+			genericResponse.setResponseCode(-1);
+			genericResponse.setResponseDesc(e.getMessage());
+		}
+
+		return genericResponse;
+	}
+
 	@DELETE
 	@Path("{group_name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,3 +101,4 @@ public class GroupResource {
 	}
 
 }
+

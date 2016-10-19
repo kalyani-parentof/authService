@@ -34,6 +34,22 @@ public class UserResource {
 		return users;
 	}
 
+	@GET
+	@Path("{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@PathParam("username") String username) {
+		LOGGER.info("Entering getUser..");
+		User user = null;
+		try {
+			user = dao.get(username);
+			LOGGER.info("Exiting getUser.." + user);
+		} catch (Exception e) {
+			LOGGER.error("Exception occured in getUser ", e);
+		}
+
+		return user;
+	}
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public GenericResponse addUser(User user) {
@@ -42,6 +58,30 @@ public class UserResource {
 		try {
 			LOGGER.info(user.toString());
 			dao.insert(user);
+			genericResponse.setResponseCode(200);
+			genericResponse.setResponseDesc("success");
+
+		}catch (Exception e){
+			e.printStackTrace();
+			genericResponse.setResponseCode(-1);
+			genericResponse.setResponseDesc(e.getMessage());
+		}
+
+		return genericResponse;
+	}
+
+	@POST
+	@Path("{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public GenericResponse updateUser(@PathParam("username") String username, User user) {
+		LOGGER.info("updating new user");
+		GenericResponse genericResponse = new GenericResponse();
+		try {
+			LOGGER.info(user.toString());
+			User dbuser = dao.get(username);
+			dbuser.updateUser(user);
+			LOGGER.info("updated user" + dbuser.toString());
+			dao.update(dbuser);
 			genericResponse.setResponseCode(200);
 			genericResponse.setResponseDesc("success");
 

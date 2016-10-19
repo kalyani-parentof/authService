@@ -4,6 +4,7 @@
 
 <mapper namespace="mappers">
     <!--        Users           -->
+
     <insert id="insertUser" parameterType="User">
          insert into users (username, firstname, lastname, email)
          values
@@ -14,8 +15,18 @@
         select * from users;
     </select>
 
+    <select id="getUser" parameterType="java.lang.String" resultType="User">
+        select * from users where username=#{username};
+    </select>
+
+    <select id="getUserOfGroup" resultType="User">
+        select * from users where username in (select user_name from user_groups where group_name=#{grp_name})
+    </select>
+
     <update id="updateUser" parameterType="User">
-        update users set status=#{status}, amount=#{amount} where memberId=#{memberId}
+        update users set
+        username=#{newUserName}, firstname=#{firstname}, lastname=#{lastname}, email=#{email}
+         where username=#{username}
     </update>
 
     <delete id="deleteUser" parameterType="java.lang.String">
@@ -48,16 +59,44 @@
         (#{name})
     </insert>
 
+    <select id="getGroup" parameterType="java.lang.String" resultType="Group">
+        select * from groups where name=#{name};
+    </select>
+
+    <select id="getAllGroupsOfUser" parameterType="java.util.Map" resultType="Group">
+        select * from groups where name in (select group_name from user_groups where user_name=#{user_name})
+    </select>
+
     <select id="getAllGroup" resultType="Group">
         select * from groups;
     </select>
 
     <update id="updateGroup" parameterType="Group">
-        update groups set status=#{status}, amount=#{amount} where memberId=#{memberId}
+        update groups set name=#{newName} where name=#{name}
     </update>
 
     <delete id="deleteGroup" parameterType="java.lang.String">
         delete from groups where name=#{group_name}
+    </delete>
+
+    <!--        User Groups           -->
+
+    <insert id="insertUserGroup" parameterType="UserGroup">
+        insert into user_groups (group_name, user_name)
+        values
+        (#{group_name}, #{user_name})
+    </insert>
+
+    <select id="getAllUserGroup" resultType="UserGroup">
+        select * from user_groups;
+    </select>
+
+    <update id="updateUserGroup" parameterType="UserGroup">
+        update user_groups set status=#{status}, amount=#{amount} where memberId=#{memberId}
+    </update>
+
+    <delete id="deleteUserFromGroup" parameterType="java.util.Map">
+        delete from user_groups where group_name=#{grp_name} and user_name=#{usr_name}
     </delete>
 
     <!--        Permission           -->
@@ -98,5 +137,27 @@
         delete from permission_groups where name=#{perm_grp_name}
     </delete>
 
+    <!--        Roles           -->
+    <insert id="insertPermissionGroupMap" parameterType="PermissionGroupMap">
+        insert into permission_groups (perm_grp_name, perm_name)
+        values
+        (#{perm_grp_name}, #{perm_name})
+    </insert>
+
+    <select id="getAllPermissionGroupMap" resultType="PermissionGroupMap">
+        select * from permission_groups_map;
+    </select>
+
+    <select id="getAllPermissionOfRole" parameterType="java.util.Map" resultType="Permission">
+        select * from permission_groups_map;
+    </select>
+
+    <select id="getAllRoleOfPermission" parameterType="java.util.Map" resultType="PermissionGroup">
+        select * from permission_groups_map;
+    </select>
+
+    <delete id="deletePermissionFromRole" parameterType="java.util.Map">
+        delete from permission_groups_map where perm_name=#{perm_name} and perm_grp_name=#{perm_grp_name}
+    </delete>
 
 </mapper>

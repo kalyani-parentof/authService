@@ -16,6 +16,22 @@ public class UserGroup {
     String group_name;
     String user_name;
 
+    public String getGroup_name() {
+        return group_name;
+    }
+
+    public void setGroup_name(String group_name) {
+        this.group_name = group_name;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);

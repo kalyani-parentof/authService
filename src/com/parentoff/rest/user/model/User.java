@@ -2,6 +2,7 @@ package com.parentoff.rest.user.model;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,9 @@ public class User {
     String firstname;
     String lastname;
     String email;
+
+
+    private String newUserName;
 
     public String getUsername() {
         return username;
@@ -50,6 +54,33 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @JsonIgnore
+    public String getNewUserName() {
+        return newUserName;
+    }
+
+    @JsonIgnore
+    public void setNewUserName(String newUserName) {
+        this.newUserName = newUserName;
+    }
+
+    public void updateUser(User otherUser) {
+
+        if(null != otherUser.getUsername()){
+            this.setNewUserName(otherUser.getUsername());
+        }
+
+        if(null != otherUser.getFirstname()){
+            this.setFirstname(otherUser.getFirstname());
+        }
+        if(null != otherUser.getLastname()){
+            this.setLastname(otherUser.getLastname());
+        }
+        if(null != otherUser.getEmail()){
+            this.setEmail(otherUser.getEmail());
+        }
     }
 
     @Override
