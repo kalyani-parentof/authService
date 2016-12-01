@@ -6,9 +6,9 @@
     <!--        Users           -->
 
     <insert id="insertUser" parameterType="User">
-         insert into users (username, firstname, lastname, email)
+         insert into users (username, firstname, lastname, email, address, area, city, state, country)
          values
-         (#{username}, #{firstname}, #{lastname}, #{email})
+         (#{username}, #{firstname}, #{lastname}, #{email}, #{address}, #{area}, #{city}, #{state}, #{country})
     </insert>
 
     <select id="getAllUser" resultType="User">
@@ -25,7 +25,8 @@
 
     <update id="updateUser" parameterType="User">
         update users set
-        username=#{newUserName}, firstname=#{firstname}, lastname=#{lastname}, email=#{email}
+        username=#{newUserName}, firstname=#{firstname}, lastname=#{lastname}, email=#{email},
+        address=#{address}, area=#{area}, city=#{city} , state=#{state}, country=#{country}
          where username=#{username}
     </update>
 
@@ -40,16 +41,20 @@
         (#{id}, #{name}, #{domain})
     </insert>
 
+    <select id="getApplication" resultType="Application">
+        select * from applications where id=#{id};
+    </select>
+
     <select id="getAllApplication" resultType="Application">
         select * from applications;
     </select>
 
     <update id="updateApplication" parameterType="Application">
-        update applications set status=#{status}, amount=#{amount} where memberId=#{memberId}
+        update applications set id=#{id}, name=#{name}, domain=#{domain} where id=#{id}
     </update>
 
     <delete id="deleteApplication" parameterType="java.lang.String">
-        delete from applications where id=#{app_id}
+        delete from applications where id=#{id}
     </delete>
 
     <!--        Groups           -->
@@ -107,7 +112,11 @@
     </insert>
 
     <select id="getAllPermission" resultType="Permission">
-        select * from permissions;
+        select * from permissions ;
+    </select>
+
+    <select id="getAllPermmissionOfRole" parameterType="java.util.Map" resultType="Permission">
+        select * from permissions where name in (select perm_name from permission_groups_map where perm_grp_name=#{perm_grp_name});
     </select>
 
     <update id="updatePermission" parameterType="Permission">
@@ -129,6 +138,10 @@
         select * from permission_groups;
     </select>
 
+    <select id="getAllRolesOfPermission" parameterType="java.util.Map" resultType="PermissionGroup">
+        select * from permission_groups where name in (select perm_grp_name from permission_groups_map where perm_name=#{perm_name});
+    </select>
+
     <update id="updatePermissionGroup" parameterType="PermissionGroup">
         update permission_groups set status=#{status}, amount=#{amount} where memberId=#{memberId}
     </update>
@@ -139,7 +152,7 @@
 
     <!--        Roles           -->
     <insert id="insertPermissionGroupMap" parameterType="PermissionGroupMap">
-        insert into permission_groups (perm_grp_name, perm_name)
+        insert into permission_groups_map (perm_grp_name, perm_name)
         values
         (#{perm_grp_name}, #{perm_name})
     </insert>
@@ -159,5 +172,10 @@
     <delete id="deletePermissionFromRole" parameterType="java.util.Map">
         delete from permission_groups_map where perm_name=#{perm_name} and perm_grp_name=#{perm_grp_name}
     </delete>
+
+    <!-- Admin -->
+    <select id="getAdmin" parameterType="java.lang.String" resultType="Admin">
+        select * from admin where username=#{username};
+    </select>
 
 </mapper>

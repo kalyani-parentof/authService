@@ -10,10 +10,10 @@ import java.sql.Timestamp;
 /**
  * Created by ankit on 10/5/16.
  */
-public class User {
+public class Admin {
 
     public static Logger LOGGER = LoggerFactory
-            .getLogger(User.class);
+            .getLogger(Admin.class);
 
     String username;
     String password;
@@ -46,12 +46,12 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        User user = (User) o;
+        Admin admin = (Admin) o;
 
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
-        LOGGER.info("username " + user.username);
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        LOGGER.info("password " + user.password);
+        if (username != null ? !username.equals(admin.username) : admin.username != null) return false;
+        LOGGER.info("username " + admin.username);
+        if (password != null ? !password.equals(admin.password) : admin.password != null) return false;
+        LOGGER.info("password " + admin.password);
         return true;
     }
 

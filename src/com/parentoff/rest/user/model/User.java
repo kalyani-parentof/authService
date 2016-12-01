@@ -6,8 +6,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Timestamp;
-
 /**
  * Created by ankit on 10/5/16.
  */
@@ -20,6 +18,11 @@ public class User {
     String firstname;
     String lastname;
     String email;
+    String address;
+    String area;
+    String city;
+    String state;
+    String country;
 
 
     private String newUserName;
@@ -56,6 +59,46 @@ public class User {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @JsonIgnore
     public String getNewUserName() {
         return newUserName;
@@ -80,6 +123,21 @@ public class User {
         }
         if(null != otherUser.getEmail()){
             this.setEmail(otherUser.getEmail());
+        }
+        if(null != otherUser.getAddress()){
+            this.setAddress(otherUser.getAddress());
+        }
+        if(null != otherUser.getArea()){
+            this.setArea(otherUser.getArea());
+        }
+        if(null != otherUser.getCity()){
+            this.setCity(otherUser.getCity());
+        }
+        if(null != otherUser.getState()){
+            this.setState(otherUser.getState());
+        }
+        if(null != otherUser.getCountry()){
+            this.setCountry(otherUser.getCountry());
         }
     }
 

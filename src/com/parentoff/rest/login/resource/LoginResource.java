@@ -1,10 +1,10 @@
 package com.parentoff.rest.login.resource;
 
 import com.parentoff.rest.db.ParentDAO;
-import com.parentoff.rest.db.dao.UserDao;
+import com.parentoff.rest.db.dao.AdminDao;
 import com.parentoff.rest.logger.FileTracker;
+import com.parentoff.rest.login.model.Admin;
 import com.parentoff.rest.login.model.LoginResponse;
-import com.parentoff.rest.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,25 +19,25 @@ import java.util.HashMap;
  */
 @Path("/login")
 public class LoginResource {
-    public static ParentDAO<User, String> userDao = new UserDao(User.class);
+    public static ParentDAO<Admin, String> adminDao = new AdminDao(Admin.class);
     public static Logger LOGGER = LoggerFactory
             .getLogger(LoginResource.class);
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public LoginResponse validateLogin(User user) {
+    public LoginResponse validateLogin(Admin admin) {
         LoginResponse response = new LoginResponse();
         HashMap<String, Object> map = new HashMap<String, Object>();
 
         try{
-            LOGGER.info("login user request " + user);
-            map.put("uiUser", user);
+            LOGGER.info("login admin request " + admin);
+            map.put("uiadmin", admin);
 
-            User dbuser = userDao.get(user.getUsername());
-            map.put("dbUser", dbuser);
+            Admin dbadmin = adminDao.get(admin.getUsername());
+            map.put("dbadmin", dbadmin);
 
-            LOGGER.info("db user " + dbuser);
-            if(user.equals(dbuser)){
+            LOGGER.info("db admin " + dbadmin);
+            if(admin.equals(dbadmin)){
                 response.setResponseDesc("success");
             }else {
                 response.setResponseDesc("fail");

@@ -41,6 +41,20 @@ public class Application {
         this.domain = domain;
     }
 
+    public void updateUser(Application otherApp) {
+
+        if(null != otherApp.getId()){
+            this.setId(otherApp.getId());
+        }
+
+        if(null != otherApp.getName()){
+            this.setName(otherApp.getName());
+        }
+        if(null != otherApp.getDomain()){
+            this.setDomain(otherApp.getDomain());
+        }
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);

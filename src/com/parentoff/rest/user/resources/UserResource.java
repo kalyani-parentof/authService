@@ -57,7 +57,11 @@ public class UserResource {
 		GenericResponse genericResponse = new GenericResponse();
 		try {
 			LOGGER.info(user.toString());
-			dao.insert(user);
+			User dbUser = dao.get(user.getUsername());
+			if(null == dbUser){
+				dao.insert(user);
+			}
+
 			genericResponse.setResponseCode(200);
 			genericResponse.setResponseDesc("success");
 

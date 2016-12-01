@@ -13,13 +13,14 @@
         </settings>
 		<typeAliases>
             <typeAlias type='com.parentoff.rest.application.model.Application' alias='Application'></typeAlias>
-            <typeAlias type='com.parentoff.rest.application.model.AppRoleUser' alias='AppRoleUser'></typeAlias>
+            <typeAlias type='com.parentoff.rest.application.model.Role' alias='AppRoleUser'></typeAlias>
             <typeAlias type='com.parentoff.rest.permission.model.Permission' alias='Permission'></typeAlias>
             <typeAlias type='com.parentoff.rest.permission.model.PermissionGroup' alias='PermissionGroup'></typeAlias>
             <typeAlias type='com.parentoff.rest.permission.model.PermissionGroupMap' alias='PermissionGroupMap'></typeAlias>
             <typeAlias type='com.parentoff.rest.user.model.User' alias='User'></typeAlias>
             <typeAlias type='com.parentoff.rest.user.model.Group' alias='Group'></typeAlias>
 			<typeAlias type='com.parentoff.rest.user.model.UserGroup' alias='UserGroup'></typeAlias>
+            <typeAlias type='com.parentoff.rest.login.model.Admin' alias='Admin'></typeAlias>
 		</typeAliases>
 
         <environments default="production">

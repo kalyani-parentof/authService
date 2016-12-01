@@ -22,13 +22,13 @@ public class ApplicationResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Application> getAllApplications() {
-		LOGGER.info("Entering getAllApplications..");
+		LOGGER.info("Entering getAllRoles..");
 		List<Application> applications = null;
 		try {
 			applications = dao.getAll();
-			LOGGER.info("Exiting getAllApplications.." + applications);
+			LOGGER.info("Exiting getAllRoles.." + applications);
 		} catch (Exception e) {
-			LOGGER.error("Exception occured in getAllApplications ", e);
+			LOGGER.error("Exception occured in getAllRoles ", e);
 		}
 
 		return applications;
@@ -42,6 +42,30 @@ public class ApplicationResource {
 		try {
 			LOGGER.info(application.toString());
 			dao.insert(application);
+			genericResponse.setResponseCode(200);
+			genericResponse.setResponseDesc("success");
+
+		}catch (Exception e){
+			e.printStackTrace();
+			genericResponse.setResponseCode(-1);
+			genericResponse.setResponseDesc(e.getMessage());
+		}
+
+		return genericResponse;
+	}
+
+	@POST
+	@Path("{appId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public GenericResponse updateApplication(@PathParam("appId") String appId, Application app) {
+		LOGGER.info("updating new application");
+		GenericResponse genericResponse = new GenericResponse();
+		try {
+			LOGGER.info(app.toString());
+			Application dbApp = dao.get(appId);
+			dbApp.updateUser(app);
+			LOGGER.info("updated application" + dbApp.toString());
+			dao.update(dbApp);
 			genericResponse.setResponseCode(200);
 			genericResponse.setResponseDesc("success");
 

@@ -3,9 +3,7 @@ package com.parentoff.rest.user.resources;
 import com.parentoff.rest.common.GenericResponse;
 import com.parentoff.rest.db.ParentDAO;
 import com.parentoff.rest.db.dao.GroupDao;
-import com.parentoff.rest.db.dao.UserDao;
 import com.parentoff.rest.user.model.Group;
-import com.parentoff.rest.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

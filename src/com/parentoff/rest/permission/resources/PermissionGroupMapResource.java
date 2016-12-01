@@ -47,45 +47,45 @@ public class PermissionGroupMapResource {
 	}
 
 	@GET
-	@Path("/group/{user_name}")
+	@Path("/roles/{perm_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<PermissionGroupMap> getAllRolesOfPermission(@PathParam("user_name") String user_name) {
-		LOGGER.info("Entering getAllGroupsOfUser..");
-		List<Group> groups = null;
+	public List<PermissionGroup> getAllRolesOfPermission(@PathParam("perm_name") String perm_name) {
+		LOGGER.info("Entering getAllRolesOfPermission..");
+		List<PermissionGroup> permissionGroups = null;
 		try {
 			Map<String, String> query_map = new HashMap<String, String>();
-			query_map.put("user_name", user_name);
-			groups = group_dao.getByqueryId("getAllGroupsOfUser", query_map);
-			LOGGER.info("Exiting getAllGroupsOfUser.." + groups);
+			query_map.put("perm_name", perm_name);
+			permissionGroups = permgrp_dao.getByqueryId("getAllRolesOfPermission", query_map);
+			LOGGER.info("Exiting getAllGroupsOfUser.." + permissionGroups);
 		} catch (Exception e) {
-			LOGGER.error("Exception occured in getAllGroupsOfUser ", e);
+			LOGGER.error("Exception occured in getAllRolesOfPermission ", e);
 		}
 
-		return groups;
+		return permissionGroups;
 	}
 
 	@GET
-	@Path("/group/{user_name}")
+	@Path("/permissions/{perm_grp_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Permission> getAllPemmissionOfRole(@PathParam("user_name") String user_name) {
-		LOGGER.info("Entering getAllGroupsOfUser..");
-		List<Group> groups = null;
+	public List<Permission> getAllPermmissionOfRole(@PathParam("perm_grp_name") String perm_grp_name) {
+		LOGGER.info("Entering getAllPermmissionOfRole..");
+		List<Permission> permissions = null;
 		try {
 			Map<String, String> query_map = new HashMap<String, String>();
-			query_map.put("user_name", user_name);
-			groups = group_dao.getByqueryId("getAllGroupsOfUser", query_map);
-			LOGGER.info("Exiting getAllGroupsOfUser.." + groups);
+			query_map.put("perm_grp_name", perm_grp_name);
+			permissions = permission_dao.getByqueryId("getAllPermmissionOfRole", query_map);
+			LOGGER.info("Exiting getAllPermmissionOfRole.." + permissions);
 		} catch (Exception e) {
-			LOGGER.error("Exception occured in getAllGroupsOfUser ", e);
+			LOGGER.error("Exception occured in getAllPermmissionOfRole ", e);
 		}
 
-		return groups;
+		return permissions;
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public GenericResponse addPermissionToGroup(PermissionGroupMap permissionGroupMap) {
-		LOGGER.info("adding new Permission");
+		LOGGER.info("adding new Role");
 		GenericResponse genericResponse = new GenericResponse();
 		try {
 			LOGGER.info(permissionGroupMap.toString());
