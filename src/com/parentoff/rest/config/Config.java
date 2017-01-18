@@ -11,7 +11,7 @@ public class Config {
             try {
             	config = new PropertiesConfiguration();
             	config.setDelimiterParsingDisabled(true);
-            	config.setFileName("/home/pooja/Documents/auth-backend/config/config.properties");
+            	config.setFileName("/home/ec2-user/auth-config/config.properties");
             	config.load();
             	config.setReloadingStrategy(new FileChangedReloadingStrategy());            	
             	config.setAutoSave(true);

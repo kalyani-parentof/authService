@@ -17,9 +17,9 @@
             <typeAlias type='com.parentoff.rest.permission.model.Permission' alias='Permission'></typeAlias>
             <typeAlias type='com.parentoff.rest.permission.model.PermissionGroup' alias='PermissionGroup'></typeAlias>
             <typeAlias type='com.parentoff.rest.permission.model.PermissionGroupMap' alias='PermissionGroupMap'></typeAlias>
-            <typeAlias type='com.parentoff.rest.user.model.User' alias='User'></typeAlias>
-            <typeAlias type='com.parentoff.rest.user.model.Group' alias='Group'></typeAlias>
-			<typeAlias type='com.parentoff.rest.user.model.UserGroup' alias='UserGroup'></typeAlias>
+            <typeAlias type='com.parentoff.rest.data.model.User' alias='User'></typeAlias>
+            <typeAlias type='com.parentoff.rest.data.model.Group' alias='Group'></typeAlias>
+			<typeAlias type='com.parentoff.rest.data.model.UserGroup' alias='UserGroup'></typeAlias>
             <typeAlias type='com.parentoff.rest.login.model.Admin' alias='Admin'></typeAlias>
 		</typeAliases>
 
@@ -31,8 +31,8 @@
                                 <property name="url" value="jdbc:mysql://localhost:3306/app_access" />
                                 <property name="username" value="parentof" />
                                 <property name="password" value="ParentOf#12" />
-                                <property name="poolMaximumActiveConnections" value="150" />
-                                <property name="poolMaximumIdleConnections" value="30" />
+                                <property name="poolMaximumActiveConnections" value="100" />
+                                <property name="poolMaximumIdleConnections" value="10" />
                                 <property name="poolPingEnabled" value="true" />
                                 <property name="poolMaximumCheckoutTime" value="20000" />
 				 <property name="poolPingEnabled" value="true" />
@@ -44,6 +44,6 @@
                 </environment>
         </environments>
         <mappers>
-                <mapper url="file:///home/ec2-user/auth-config/sqlQueries.xml" />
+                <mapper url="file:///home/ec2-data/auth-config/sqlQueries.xml" />
         </mappers>
 </configuration>

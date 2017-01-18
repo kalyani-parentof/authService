@@ -34,6 +34,22 @@ public class ApplicationResource {
 		return applications;
 	}
 
+	@GET
+	@Path("{appId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Application getApplication(@PathParam("appId") String appId) {
+		LOGGER.info("Entering getApplication..");
+		Application application = null;
+		try {
+			application = dao.get(appId);
+			LOGGER.info("Exiting getApplication.." + application);
+		} catch (Exception e) {
+			LOGGER.error("Exception occured in getApplication ", e);
+		}
+
+		return application;
+	}
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public GenericResponse addApplication(Application application) {
@@ -81,7 +97,7 @@ public class ApplicationResource {
 	@DELETE
 	@Path("{app_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public GenericResponse deleteUser(@PathParam("app_id") String app_id) {
+	public GenericResponse deleteApplication(@PathParam("app_id") String app_id) {
 		LOGGER.info("deleting application");
 		GenericResponse genericResponse = new GenericResponse();
 		try {
