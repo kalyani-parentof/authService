@@ -88,7 +88,7 @@ public class ParentOffExceptionMapper implements ExceptionMapper<Throwable> {
 		}
 
 		if (parentOffException == null) {
-			String message = "Unexpected error occured. Contact Ubona Technologies for further assistance with traceId - "
+			String message = "Unexpected error occured. Contact ParentOf for further assistance with traceId - "
 					+ traceId;
 			status = Status.INTERNAL_SERVER_ERROR;
 			parentOffException = new ParentOffException(

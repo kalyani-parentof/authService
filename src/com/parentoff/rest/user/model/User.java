@@ -14,41 +14,25 @@ public class User {
     public static Logger LOGGER = LoggerFactory
             .getLogger(User.class);
 
-    String username;
-    String firstname;
-    String lastname;
-    String email;
-    String address;
-    String area;
-    String city;
-    String state;
-    String country;
+    @JsonIgnore
+    private int id;
+    private String mobile;
+    private String email;
 
-
-    private String newUserName;
-
-    public String getUsername() {
-        return username;
+    public int getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getEmail() {
@@ -59,86 +43,14 @@ public class User {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    @JsonIgnore
-    public String getNewUserName() {
-        return newUserName;
-    }
-
-    @JsonIgnore
-    public void setNewUserName(String newUserName) {
-        this.newUserName = newUserName;
-    }
-
-    public void updateUser(User otherUser) {
-
-        if(null != otherUser.getUsername()){
-            this.setNewUserName(otherUser.getUsername());
+    public static User setFromJoinUser(JoinUsers joinUser){
+        User user = new User();
+        user.setMobile(joinUser.getMobile());
+        user.setEmail(joinUser.getEmail());
+        if(0 !=joinUser.getId()){
+            user.setId(joinUser.getId());
         }
-
-        if(null != otherUser.getFirstname()){
-            this.setFirstname(otherUser.getFirstname());
-        }
-        if(null != otherUser.getLastname()){
-            this.setLastname(otherUser.getLastname());
-        }
-        if(null != otherUser.getEmail()){
-            this.setEmail(otherUser.getEmail());
-        }
-        if(null != otherUser.getAddress()){
-            this.setAddress(otherUser.getAddress());
-        }
-        if(null != otherUser.getArea()){
-            this.setArea(otherUser.getArea());
-        }
-        if(null != otherUser.getCity()){
-            this.setCity(otherUser.getCity());
-        }
-        if(null != otherUser.getState()){
-            this.setState(otherUser.getState());
-        }
-        if(null != otherUser.getCountry()){
-            this.setCountry(otherUser.getCountry());
-        }
+        return user;
     }
 
     @Override
