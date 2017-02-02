@@ -139,6 +139,19 @@ public class MyBatisDAO<T, PK> implements ParentDAO<T, PK> {
 		return status;
 	}
 
+	@SuppressWarnings("unchecked")
+	public T getOneByQueryId(String id, Map map) throws PersistenceException {
+		SqlSession session = sf.openSession();
+		T obj = null;
+		try {
+			obj = (T) session.selectOne(id, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return obj;
+	}
+
 	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public List getByqueryId(String id, Map map) throws PersistenceException {
@@ -185,8 +198,8 @@ public class MyBatisDAO<T, PK> implements ParentDAO<T, PK> {
 
 		return status;
 	}
-	
-	
+
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public int deleteByqueryId(String id, Map map) throws PersistenceException {

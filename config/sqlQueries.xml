@@ -6,7 +6,7 @@
     <!--        Users           -->
 
     <select id="getUser" resultType="User" parameterType="java.lang.String">
-        select * from users where mobile=#{mobile};
+        select * from users where id=#{id};
     </select>
 
     <select id="getAllUsersByJoin" resultType="JoinUsers">
@@ -17,9 +17,18 @@
         select id, mobile, email, firstname, lastname, address, area, city, state, country from users u left join user_info i on u.id=i.user_id where u.id=#{id};
     </select>
 
-    <select id="getUserByMobile" parameterType="java.util.Map" resultType="JoinUsers">
+    <select id="getJoinUserByMobile" parameterType="java.util.Map" resultType="JoinUsers">
         select id, mobile, email, firstname, lastname, address, area, city, state, country from users u left join user_info i on u.id=i.user_id where u.mobile=#{mobile};
     </select>
+
+    <select id="getUserByMobile" parameterType="java.util.Map" resultType="User">
+        select * from users where mobile=#{mobile};
+    </select>
+
+    <select id="getUserByEmail" parameterType="java.util.Map" resultType="User">
+        select * from users where email=#{email};
+    </select>
+
 
     <insert id="insertUser" parameterType="User">
         insert into users (mobile, email)
@@ -47,7 +56,7 @@
     </update>
 
     <delete id="deleteUser" parameterType="java.lang.String">
-        delete from users where username=#{username}
+        delete from users where id=#{id}
     </delete>
 
     <!--        Applications           -->
@@ -66,7 +75,7 @@
     </select>
 
     <update id="updateApplication" parameterType="Application">
-        update applications set id=#{id}, name=#{name}, domain=#{domain} where id=#{id}
+        update applications set id=#{newId}, name=#{name}, domain=#{domain} where id=#{id}
     </update>
 
     <delete id="deleteApplication" parameterType="java.lang.String">
@@ -77,5 +86,21 @@
     <select id="getAdmin" parameterType="java.lang.String" resultType="Admin">
         select * from admin where username=#{username};
     </select>
+
+    <!-- OTP -->
+    <insert id="insertOtp" parameterType="Otp">
+        insert into otp (app_id, user_id, token)
+        values
+        (#{app_id}, #{user_id}, #{token})
+    </insert>
+
+    <select id="getOtpById" parameterType="java.util.Map" resultType="Otp">
+        select * from otp where app_id=#{app_id} and user_id=#{user_id};
+    </select>
+
+    <update id="updateOtp" parameterType="Otp">
+        update otp set token=#{token}
+        where app_id=#{app_id} and user_id=#{user_id};
+    </update>
 
 </mapper>

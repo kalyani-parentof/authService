@@ -17,6 +17,7 @@
             <typeAlias type='com.parentoff.rest.user.model.UserInfo' alias='UserInfo'></typeAlias>
             <typeAlias type='com.parentoff.rest.user.model.JoinUsers' alias='JoinUsers'></typeAlias>
             <typeAlias type='com.parentoff.rest.login.model.Admin' alias='Admin'></typeAlias>
+            <typeAlias type='com.parentoff.rest.otp.model.Otp' alias='Otp'></typeAlias>
 		</typeAliases>
 
         <environments default="production">
@@ -24,7 +25,7 @@
                         <transactionManager type="JDBC" />
                         <dataSource type="POOLED">
                                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                                <property name="url" value="jdbc:mysql://localhost:3306/user_central" />
+                                <property name="url" value="jdbc:mysql://localhost:3306/parentof_auth" />
                                 <property name="username" value="parentof" />
                                 <property name="password" value="ParentOf#12" />
                                 <property name="poolMaximumActiveConnections" value="100" />

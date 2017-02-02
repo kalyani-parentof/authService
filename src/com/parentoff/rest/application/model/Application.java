@@ -1,5 +1,6 @@
 package com.parentoff.rest.application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.slf4j.Logger;
@@ -12,6 +13,9 @@ public class Application {
 
     public static Logger LOGGER = LoggerFactory
             .getLogger(Application.class);
+
+    @JsonIgnore
+    String newId;
 
     String id;
     String name;
@@ -41,10 +45,18 @@ public class Application {
         this.domain = domain;
     }
 
-    public void updateUser(Application otherApp) {
+    public String getNewId() {
+        return newId;
+    }
+
+    public void setNewId(String newId) {
+        this.newId = newId;
+    }
+
+    public Application updateApp(Application otherApp) {
 
         if(null != otherApp.getId()){
-            this.setId(otherApp.getId());
+            this.setNewId(otherApp.getId());
         }
 
         if(null != otherApp.getName()){
@@ -53,6 +65,7 @@ public class Application {
         if(null != otherApp.getDomain()){
             this.setDomain(otherApp.getDomain());
         }
+        return this;
     }
 
     @Override

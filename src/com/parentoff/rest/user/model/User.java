@@ -14,7 +14,6 @@ public class User {
     public static Logger LOGGER = LoggerFactory
             .getLogger(User.class);
 
-    @JsonIgnore
     private int id;
     private String mobile;
     private String email;

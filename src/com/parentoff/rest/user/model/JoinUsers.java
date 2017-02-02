@@ -100,6 +100,38 @@ public class JoinUsers {
         this.country = country;
     }
 
+    public JoinUsers update(JoinUsers other){
+        if(other.getEmail() != null){
+            this.setEmail(other.getEmail());
+        }
+        if(other.getMobile() != null){
+            this.setMobile(other.getMobile());
+        }
+        if(other.getAddress() != null){
+            this.setAddress(other.getAddress());
+        }
+        if(other.getArea() != null){
+            this.setArea(other.getArea());
+        }
+        if(other.getCity() != null){
+            this.setCountry(other.getCity());
+        }
+        if(other.getState() != null){
+            this.setState(other.getState());
+        }
+        if(other.getCountry() != null){
+            this.setCountry(other.getCountry());
+        }
+        if(other.getFirstname() != null){
+            this.setFirstname(other.getFirstname());
+        }
+        if(other.getLastname() != null){
+            this.setLastname(other.getLastname());
+        }
+
+        return this;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
